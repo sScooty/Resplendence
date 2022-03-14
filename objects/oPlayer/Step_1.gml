@@ -1,3 +1,8 @@
+if healthpoints <= 0
+{
+	room_goto(roDeathScreen)
+}
+
 //	KEYBOARD INPUTS
 key_left = keyboard_check(ord("A"));
 key_right = keyboard_check(ord("D"));

@@ -46,6 +46,13 @@ if (healthpoints > basehealth)								//ensures health never goes above maximum
 	healthpoints = basehealth;
 };
 
+// LIGHT
+
+if light > baselight
+{
+	light = baselight
+}
+
 //	DASH
 
 if not (dashcd = 0)										//lowers the dash cooldown

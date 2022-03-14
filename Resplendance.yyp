@@ -20,6 +20,7 @@
     {"id":{"name":"oGame","path":"objects/oGame/oGame.yy",},"order":12,},
     {"id":{"name":"sHealthBar","path":"sprites/sHealthBar/sHealthBar.yy",},"order":5,},
     {"id":{"name":"shWhite","path":"shaders/shWhite/shWhite.yy",},"order":0,},
+    {"id":{"name":"rozDeathScreen","path":"rooms/rozDeathScreen/rozDeathScreen.yy",},"order":1,},
     {"id":{"name":"oWall","path":"objects/oWall/oWall.yy",},"order":1,},
     {"id":{"name":"oGrunt","path":"objects/oGrunt/oGrunt.yy",},"order":8,},
     {"id":{"name":"oPlayerHealthBar","path":"objects/oPlayerHealthBar/oPlayerHealthBar.yy",},"order":13,},
@@ -33,7 +34,7 @@
     {"id":{"name":"shLight","path":"shaders/shLight/shLight.yy",},"order":1,},
     {"id":{"name":"oCamera","path":"objects/oCamera/oCamera.yy",},"order":11,},
     {"id":{"name":"sGruntForward","path":"sprites/sGruntForward/sGruntForward.yy",},"order":10,},
-    {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":0,},
+    {"id":{"name":"roTestRoom1","path":"rooms/roTestRoom1/roTestRoom1.yy",},"order":0,},
   ],
   "Options": [
     {"name":"Main","path":"options/main/options_main.yy",},
@@ -50,7 +51,12 @@
     "children": [],
   },
   "RoomOrderNodes": [
-    {"roomId":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+    {"groupName":"Test Rooms","children":[
+        {"roomId":{"name":"roTestRoom1","path":"rooms/roTestRoom1/roTestRoom1.yy",},},
+      ],},
+    {"groupName":"UI Rooms","children":[
+        {"roomId":{"name":"rozDeathScreen","path":"rooms/rozDeathScreen/rozDeathScreen.yy",},},
+      ],},
   ],
   "Folders": [
     {"folderPath":"folders/Sprites.yy","order":1,"resourceVersion":"1.0","name":"Sprites","tags":[],"resourceType":"GMFolder",},

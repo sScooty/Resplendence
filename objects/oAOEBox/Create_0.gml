@@ -6,7 +6,7 @@ repeat(hitCount)
 	{
 		oGrunt.RES -= 35
 		oGrunt.magicdamagedealt = CalcMagicDamage(oPlayer.ATK, irandom_range(0,35), oGrunt.RES);
-		with instance_create_layer((oGrunt.x + irandom_range(-16, 8)), (oGrunt.y + irandom_range(-78, -24)), 0, oDamageText)
+		with instance_create_layer((oGrunt.x + irandom_range(-16, 8)), (oGrunt.y + irandom_range(-78, -24)), "UI", oDamageText)
 			{
 				damage = oGrunt.magicdamagedealt;
 			};

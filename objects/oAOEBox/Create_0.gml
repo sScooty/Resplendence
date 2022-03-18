@@ -4,7 +4,7 @@ repeat(hitCount)
 {
 	with(ds_list_find_value(_hitlist, 0))
 	{
-		oGrunt.RES -= 35
+		oGrunt.ResShred = 300
 		oGrunt.magicdamagedealt = CalcMagicDamage(oPlayer.ATK, irandom_range(0,35), oGrunt.RES);
 		with instance_create_layer((oGrunt.x + irandom_range(-16, 8)), (oGrunt.y + irandom_range(-78, -24)), "UI", oDamageText)
 			{

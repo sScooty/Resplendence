@@ -1,12 +1,14 @@
+image_xscale = 3
+image_yscale = 3
 var _hitlist = ds_list_create();
 hitCount = instance_place_list(x,y,oGrunt,_hitlist,true);
 repeat(hitCount)
 {
 	with(ds_list_find_value(_hitlist, 0))
 	{
-		oGrunt.RES -= 35
+		oGrunt.ResShred = 300
 		oGrunt.magicdamagedealt = CalcMagicDamage(oPlayer.ATK, irandom_range(0,35), oGrunt.RES);
-		with instance_create_layer((oGrunt.x + irandom_range(-16, 8)), (oGrunt.y + irandom_range(-78, -24)), 0, oDamageText)
+		with instance_create_layer((oGrunt.x + irandom_range(-16, 8)), (oGrunt.y + irandom_range(-78, -24)), "UI", oDamageText)
 			{
 				damage = oGrunt.magicdamagedealt;
 			};

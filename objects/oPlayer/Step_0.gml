@@ -41,7 +41,7 @@ if (healthrechargecd = 0) and (healthpoints < basehealth)  //adds health back to
 {
 	healthpoints = healthpoints + healthrechargerate;
 };
-if (healthpoints > basehealth)								//ensures health never goes above maximum
+if (healthpoints > basehealth)							//ensures health never goes above maximum
 {
 	healthpoints = basehealth;
 };
@@ -87,7 +87,7 @@ if (key_attack_heavy) and (stamina >= heavyattackstaminacost) and (oSword.attack
 	staminarechargecd = basestaminarechargecd;
 	oSword.attacking = 10;
 	oSword.heavy = true;
-	oSword.image_index = 0;;
+	oSword.image_index = 0;
 	audio_play_sound(sfxHeavy, 1, 0);
 };
 if (key_attack_light) and (oSword.attacking = 0) //initiates light attack
@@ -123,12 +123,12 @@ if (place_meeting(x,y+1,oWall)) and (key_jump)			//jump
 	vsp = jumpheight;
 };
 
-//	MAGIC ATTACKS
+//	MAGIC
 
 if (key_magic_aoe) and (light >= lightaoeattackcost)
 {
 	light = light - lightaoeattackcost;
-	instance_create_layer(x, y, layer, oAOEBox)
+	instance_create_layer(x, y, layer, oAOEBox);
 };
 if (key_magic_small) and (light >= lightsmallattackcost)
 {
@@ -139,4 +139,17 @@ if (key_magic_infuse) and (light >= lightinfuesecost)
 {
 	light = light - lightinfuesecost;
 	oSword.infused = 300;
+};
+
+if (key_magic_heal) and (light >= lighthealcost) and (healthpoints < basehealth)
+{
+	light = light - lighthealcost;
+	if ((healthpoints + lighthealamount) > basehealth)
+	{
+		healthpoints = basehealth
+	};
+	else
+	{
+		healthpoints = healthpoints + lighthealamount;
+	};
 };

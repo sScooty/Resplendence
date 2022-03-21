@@ -13,3 +13,4 @@ key_attack_heavy = keyboard_check_pressed(ord("K"));
 key_magic_aoe = keyboard_check_pressed(ord("U"));
 key_magic_small = keyboard_check_pressed(ord("I"));
 key_magic_infuse = keyboard_check_pressed(186); //Semicolon (;) key
+key_magic_heal = keyboard_check_pressed(ord("Q"));

@@ -1,20 +1,20 @@
 vsp = vsp + grv;					//sets vertical speed of grunt
-hsp = walkspd						//sets horizontal speed of grunt
+hsp = walkspd;						//sets horizontal speed of grunt
 
 //	COLLISION & FOLLOW PLAYER
 
 
 if x-oPlayer.x > 0 and x-oPlayer.x < 512
 	{
-		hsp = walkspd * -1
+		hsp = walkspd * -1;
 	};
 else if x-oPlayer.x < 0 and x-oPlayer.x > -512
 	{
-		hsp = walkspd
+		hsp = walkspd;
 	};
 else
 	{
-		hsp = 0
+		hsp = 0;
 	};
 if (place_meeting(x+hsp,y,oWall))						//horizontal collision
 	{
@@ -23,7 +23,7 @@ if (place_meeting(x+hsp,y,oWall))						//horizontal collision
 			x = x + sign(hsp);
 		};
 		hsp = 0;
-		vsp = jumpheight
+		vsp = jumpheight;
 	};
 x = x + hsp;											//move left/right
 if (place_meeting(x,y+vsp,oWall))						//vertical collision
@@ -35,6 +35,39 @@ if (place_meeting(x,y+vsp,oWall))						//vertical collision
 	vsp = 0;
 };
 y = y + vsp;											//gravity
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 if lightiframes > 0
 {
@@ -57,7 +90,7 @@ if (place_meeting(x,y,oSword)) and (oPlayer.key_attack_light = 1) and (lightifra
 	vsp = -3;
 	var xDiff = irandom_range(-16, 8);
 	var yDiff = irandom_range(-78, -24);
-	with instance_create_layer((x + xDiff), (y + yDiff), 0, oDamageText)
+	with instance_create_layer((x + xDiff), (y + yDiff), "UI", oDamageText)
 	{
 		damage = CalcDamage((oPlayer.ATK+oSword.ATK), oGrunt.DEF, oPlayer.BUFF, oGrunt.RES);
 	};
@@ -72,7 +105,7 @@ if (place_meeting(x,y,oSword)) and (oPlayer.key_attack_heavy = 1) and (heavyifra
 	vsp = -3;
 	var xDiff = irandom_range(-16, 8);
 	var yDiff = irandom_range(-78, -24);
-	with instance_create_layer((x + xDiff), (y + yDiff), 0, oDamageText)
+	with instance_create_layer((x + xDiff), (y + yDiff), "UI", oDamageText)
 		{
 			damage = CalcDamage((oPlayer.ATK+oSword.ATK*2), oGrunt.DEF, oPlayer.BUFF, oGrunt.RES);
 		};
@@ -95,7 +128,19 @@ if attackcd > 0
 
 if (place_meeting(x,y,oPlayer)) and attackcd = 0
 {
-	attackcd = 30
-	oPlayer.healthpoints = oPlayer.healthpoints - CalcDamage(oGrunt.ATK, oPlayer.DEF, oGrunt.BUFF, oPlayer.RES)
-	oPlayer.healthrechargecd = oPlayer.basehealthrechargecd
+	attackcd = 30;
+	audio_play_sound(sfxOof, 1, 0)
+	oPlayer.healthpoints = oPlayer.healthpoints - CalcDamage(oGrunt.ATK, oPlayer.DEF, oGrunt.BUFF, oPlayer.RES);
+	oPlayer.healthrechargecd = oPlayer.basehealthrechargecd;
 };
+
+//EFFECTS
+
+if ResShred > 0
+{
+	RES = -20
+}
+else
+{
+	RES = 15
+}

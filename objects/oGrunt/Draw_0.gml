@@ -1,3 +1,7 @@
+// ~~~~~~~~~
+// HITFLASH
+// ~~~~~~~~~
+
 draw_self();
 if flash > 0
 {

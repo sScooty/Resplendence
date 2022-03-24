@@ -1,16 +1,28 @@
+// ~~~~~~~~~
+// MOVEMENT
+// ~~~~~~~~~
+
 hsp = 0; //horizontal speed
 vsp = 0; //vertical speed
 grv = 0.6; //gravity
 jumpheight = -7;
 walkspd = 3; //walk speed
+
+// ~~~~~~~~~
+//   STATS
+// ~~~~~~~~~
+
 healthpoints = 250;
-flash = 3;
 RES = 15;
 BUFF = 0;
-ATK = 6;
-DEF = 3;
-lightiframes = 0; //prevents multiple hits registering too fast
-heavyiframes = 0;
+ATK = 12;
+DEF = 6;
+
+// ~~~~~~~~~
+//   OTHER
+// ~~~~~~~~~
+
 magicdamagedealt = 0;
 attackcd = 30;
-ResShred = 0;
+resshred = 0;
+flash = 3;

@@ -11,14 +11,14 @@
     "name": "audiogroup_default",
     "path": "audiogroups/audiogroup_default",
   },
-  "soundFile": "sfxOof.mp3",
+  "soundFile": "sfxPain.mp3",
   "duration": 3.108571,
   "parent": {
     "name": "Sounds",
     "path": "folders/Sounds.yy",
   },
   "resourceVersion": "1.0",
-  "name": "sfxOof",
+  "name": "sfxPain",
   "tags": [],
   "resourceType": "GMSound",
 }

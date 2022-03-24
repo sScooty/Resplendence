@@ -1,3 +1,4 @@
+alarm[11] = 0.25*room_speed
 image_xscale = 3
 image_yscale = 3
 var _hitlist = ds_list_create();
@@ -6,14 +7,13 @@ repeat(hitCount)
 {
 	with(ds_list_find_value(_hitlist, 0))
 	{
-		oGrunt.ResShred = 300
-		oGrunt.magicdamagedealt = CalcMagicDamage(oPlayer.ATK, irandom_range(0,35), oGrunt.RES);
-		with instance_create_layer((oGrunt.x + irandom_range(-16, 8)), (oGrunt.y + irandom_range(-78, -24)), "UI", oDamageText)
+		resshred = 300;
+		magicdamagedealt = CalcMagicDamage(oPlayer.ATK, 0, RES);
+		with instance_create_layer((x + irandom_range(-16, 8)), (y + irandom_range(-78, -24)), "UI", oDamageText)
 			{
-				damage = oGrunt.magicdamagedealt;
+				damage = CalcMagicDamage(oPlayer.ATK, oPlayer.BUFF, oGrunt.RES);
 			};
 		};
 	ds_list_delete(_hitlist,0)
 };
 ds_list_destroy(_hitlist);
-instance_destroy();

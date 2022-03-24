@@ -1,8 +1,8 @@
+// ~~~~~~~~~
+//	MOVEMENT
+// ~~~~~~~~~
+
 vsp = vsp + grv;					//sets vertical speed of grunt
-hsp = walkspd;						//sets horizontal speed of grunt
-
-//	COLLISION & FOLLOW PLAYER
-
 
 if x-oPlayer.x > 0 and x-oPlayer.x < 512
 	{
@@ -25,7 +25,6 @@ if (place_meeting(x+hsp,y,oWall))						//horizontal collision
 		hsp = 0;
 		vsp = jumpheight;
 	};
-x = x + hsp;											//move left/right
 if (place_meeting(x,y+vsp,oWall))						//vertical collision
 {
 	while (!place_meeting(x,y+sign(vsp),oWall))
@@ -34,80 +33,38 @@ if (place_meeting(x,y+vsp,oWall))						//vertical collision
 	};
 	vsp = 0;
 };
+x = x + hsp;											//move left/right
 y = y + vsp;											//gravity
 
+// ~~~~~~~~~
+//	DAMAGE
+// ~~~~~~~~~
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-if lightiframes > 0
+if (place_meeting(x,y,oSword)) and (oPlayer.key_attack_light = 1) and oPlayer.blocking = false
 {
-	lightiframes --;
-};
-
-if heavyiframes > 0
-{
-	heavyiframes --;
-};
-
-// TAKE DAMAGE
-
-if (place_meeting(x,y,oSword)) and (oPlayer.key_attack_light = 1) and (lightiframes = 0)
-{
-	healthpoints = healthpoints - CalcDamage((oPlayer.ATK+oSword.ATK), DEF, oPlayer.BUFF, RES);
+	healthpoints = healthpoints - CalcDamage(oPlayer.ATK, DEF, oPlayer.BUFF, RES);
 	audio_play_sound(sfxHit, 1, 0)
 	flash = 3;
-	lightiframes = 10;
 	vsp = -3;
 	var xDiff = irandom_range(-16, 8);
 	var yDiff = irandom_range(-78, -24);
 	with instance_create_layer((x + xDiff), (y + yDiff), "UI", oDamageText)
 	{
-		damage = CalcDamage((oPlayer.ATK+oSword.ATK), oGrunt.DEF, oPlayer.BUFF, oGrunt.RES);
+		damage = CalcDamage(oPlayer.ATK, oGrunt.DEF, oPlayer.BUFF, oGrunt.RES);
 	};
 };
 
-if (place_meeting(x,y,oSword)) and (oPlayer.key_attack_heavy = 1) and (heavyiframes = 0)
+if (place_meeting(x,y,oSword)) and (oPlayer.key_attack_heavy = 1) and oPlayer.blocking = false
 {
-	healthpoints = healthpoints - CalcDamage((oPlayer.ATK+oSword.ATK*2), DEF, oPlayer.BUFF, RES);
+	healthpoints = healthpoints - CalcDamage(oPlayer.ATK*2, DEF, oPlayer.BUFF, RES);
 	audio_play_sound(sfxHit, 1, 0)
 	flash = 3;
-	heavyiframes = 20;
 	vsp = -3;
 	var xDiff = irandom_range(-16, 8);
 	var yDiff = irandom_range(-78, -24);
 	with instance_create_layer((x + xDiff), (y + yDiff), "UI", oDamageText)
 		{
-			damage = CalcDamage((oPlayer.ATK+oSword.ATK*2), oGrunt.DEF, oPlayer.BUFF, oGrunt.RES);
+			damage = CalcDamage(oPlayer.ATK*2, oGrunt.DEF, oPlayer.BUFF, oGrunt.RES);
 		};
 };
 	if (magicdamagedealt > 0)
@@ -119,7 +76,9 @@ if (place_meeting(x,y,oSword)) and (oPlayer.key_attack_heavy = 1) and (heavyifra
 	magicdamagedealt = 0;
 	};
 
-//ATTACK PLAYER
+// ~~~~~~~~~
+//	ATTACK
+// ~~~~~~~~~
 
 if attackcd > 0
 {
@@ -129,18 +88,20 @@ if attackcd > 0
 if (place_meeting(x,y,oPlayer)) and attackcd = 0
 {
 	attackcd = 30;
-	audio_play_sound(sfxOof, 1, 0)
+	audio_play_sound(sfxPain, 1, 0)
 	oPlayer.healthpoints = oPlayer.healthpoints - CalcDamage(oGrunt.ATK, oPlayer.DEF, oGrunt.BUFF, oPlayer.RES);
 	oPlayer.healthrechargecd = oPlayer.basehealthrechargecd;
 };
 
-//EFFECTS
+// ~~~~~~~~~
+//	EFFECTS
+// ~~~~~~~~~
 
-if ResShred > 0
+if resshred > 0
 {
-	RES = -20
-}
+	RES = -20;
+};
 else
 {
-	RES = 15
-}
+	RES = 15;
+};

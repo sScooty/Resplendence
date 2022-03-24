@@ -1,20 +1,6 @@
-var move = key_right - key_left;						//calculate movement
-if move < 0
-{
-	sprite_index = sPlayerSideMoving;
-	image_xscale = 2;
-};
-else if move > 0
-{
-	sprite_index = sPlayerSideMoving;
-	image_xscale = -2;
-};
-else
-{
-	sprite_index = sPlayerForward;
-};
-hsp = move * walkspd;									//sets horizontal speed of player
-vsp = vsp + grv;										//sets vertical speed of player
+// ~~~~~~~~~
+//	 STATS
+// ~~~~~~~~~
 
 //	STAMINA
 
@@ -22,7 +8,7 @@ if (staminarechargecd > 0)								//reduces cooldown on stamina beginning to rec
 {
 	staminarechargecd = staminarechargecd - 1;
 }
-if (staminarechargecd = 0) and (stamina < basestamina)  //adds stamina back to player
+else if (staminarechargecd = 0) and (stamina < basestamina)  //adds stamina back to player
 {
 	stamina = stamina + staminarechargerate;
 };
@@ -53,6 +39,32 @@ if light > baselight
 	light = baselight
 }
 
+
+// ~~~~~~~~~
+//	MOVEMENT
+// ~~~~~~~~~
+
+
+//	HORIZONTAL MOVEMENT
+
+var move = key_right - key_left;						//calculate movement
+if move < 0
+{
+	sprite_index = sPlayerSideMoving;
+	image_xscale = 2;
+};
+else if move > 0
+{
+	sprite_index = sPlayerSideMoving;
+	image_xscale = -2;
+};
+else
+{
+	sprite_index = sPlayerForward;
+};
+hsp = move * walkspd;									//sets horizontal speed of player
+vsp = vsp + grv;										//sets vertical speed of player
+
 //	DASH
 
 if not (dashcd = 0)										//lowers the dash cooldown
@@ -79,27 +91,6 @@ else
 	RES = 0;
 };
 
-//	MELEE ATTACKS
-
-if (key_attack_heavy) and (stamina >= heavyattackstaminacost) and (oSword.attacking = 0)//initiates heavy attack
-{
-	stamina = stamina - heavyattackstaminacost;
-	staminarechargecd = basestaminarechargecd;
-	oSword.attacking = 10;
-	oSword.heavy = true;
-	oSword.image_index = 0;
-	audio_play_sound(sfxHeavy, 1, 0);
-};
-if (key_attack_light) and (oSword.attacking = 0) //initiates light attack
-{
-	oSword.attacking = 10;
-	oSword.heavy = false;
-	oSword.image_index = 0;
-	audio_play_sound(sfxSwipe, 1, 0);
-};
-
-//	COLLISION
-
 if (place_meeting(x+hsp,y,oWall))						//horizontal collision
 {
 	while (!place_meeting(x+sign(hsp),y,oWall))
@@ -108,7 +99,9 @@ if (place_meeting(x+hsp,y,oWall))						//horizontal collision
 	};
 	hsp = 0;
 };
-x = x + hsp;											//move left/right
+
+//	VERTICAL MOVEMENT
+
 if (place_meeting(x,y+vsp,oWall))						//vertical collision
 {
 	while (!place_meeting(x,y+sign(vsp),oWall))
@@ -117,31 +110,34 @@ if (place_meeting(x,y+vsp,oWall))						//vertical collision
 	};
 	vsp = 0;
 };
-y = y + vsp;											//gravity
 if (place_meeting(x,y+1,oWall)) and (key_jump)			//jump
 {
 	vsp = jumpheight;
 };
 
-//	MAGIC
 
-if (key_magic_aoe) and (light >= lightaoeattackcost)
+// ~~~~~~~~~
+//	 MAGIC
+// ~~~~~~~~~
+
+
+if (key_magic_aoe) and (light >= lightaoeattackcost)	//large area of effect attack
 {
 	light = light - lightaoeattackcost;
 	instance_create_layer(x, y, layer, oAOEBox);
 };
-if (key_magic_small) and (light >= lightsmallattackcost)
+if (key_magic_small) and (light >= lightsmallattackcost)	//small area of effect attack
 {
 	light = light - lightsmallattackcost;
 	smallattack = 1;
 };
-if (key_magic_infuse) and (light >= lightinfuesecost)
+if (key_magic_infuse) and (light >= lightinfuesecost)	//infuse weapon
 {
 	light = light - lightinfuesecost;
 	oSword.infused = 300;
 };
 
-if (key_magic_heal) and (light >= lighthealcost) and (healthpoints < basehealth)
+if (key_magic_heal) and (light >= lighthealcost) and (healthpoints < basehealth)	//heal
 {
 	light = light - lighthealcost;
 	if ((healthpoints + lighthealamount) > basehealth)
@@ -153,3 +149,38 @@ if (key_magic_heal) and (light >= lighthealcost) and (healthpoints < basehealth)
 		healthpoints = healthpoints + lighthealamount;
 	};
 };
+
+
+// ~~~~~~~~~
+//	COMBAT
+// ~~~~~~~~~
+
+if key_block
+{
+	hsp = hsp/3;
+	RES = 75;
+	blocking = true;
+};
+else
+{
+	RES = 0;
+	blocking = false;
+};
+if key_attack_light and oSword.attacking = 0 and blocking = false //initiates light attack
+{
+	oSword.attacking = 10;
+	oSword.heavy = false;
+	oSword.image_index = 0;
+	audio_play_sound(sfxSwipe, 1, 0);
+};
+else if key_attack_heavy and stamina >= heavyattackstaminacost and oSword.attacking = 0 and blocking = false //initiates heavy attack
+{
+	stamina = stamina - heavyattackstaminacost;
+	staminarechargecd = basestaminarechargecd;
+	oSword.attacking = 20;
+	oSword.heavy = true;
+	oSword.image_index = 0;
+	audio_play_sound(sfxHeavy, 1, 0);
+};
+x = x + hsp;											//move left/right
+y = y + vsp;											//vertical movement

@@ -2,6 +2,7 @@
   "resources": [
     {"id":{"name":"sAOEBox","path":"sprites/sAOEBox/sAOEBox.yy",},"order":15,},
     {"id":{"name":"sUIBarBg","path":"sprites/sUIBarBg/sUIBarBg.yy",},"order":4,},
+    {"id":{"name":"oAOEIcon","path":"objects/oAOEIcon/oAOEIcon.yy",},"order":20,},
     {"id":{"name":"sfxHit","path":"sounds/sfxHit/sfxHit.yy",},"order":1,},
     {"id":{"name":"sfxHeavy","path":"sounds/sfxHeavy/sfxHeavy.yy",},"order":2,},
     {"id":{"name":"oContinueButton","path":"objects/oContinueButton/oContinueButton.yy",},"order":17,},
@@ -30,6 +31,7 @@
     {"id":{"name":"oWall","path":"objects/oWall/oWall.yy",},"order":1,},
     {"id":{"name":"oGrunt","path":"objects/oGrunt/oGrunt.yy",},"order":8,},
     {"id":{"name":"oPlayerHealthBar","path":"objects/oPlayerHealthBar/oPlayerHealthBar.yy",},"order":13,},
+    {"id":{"name":"sAOEIcon","path":"sprites/sAOEIcon/sAOEIcon.yy",},"order":18,},
     {"id":{"name":"QuickSave","path":"scripts/QuickSave/QuickSave.yy",},"order":4,},
     {"id":{"name":"sWall","path":"sprites/sWall/sWall.yy",},"order":1,},
     {"id":{"name":"QuickLoad","path":"scripts/QuickLoad/QuickLoad.yy",},"order":3,},

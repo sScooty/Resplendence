@@ -5,10 +5,9 @@
 
 if instance_exists(oPlayerLightBar)
 {
-	oPlayerLightBar.image_yscale = 1;
-	oPlayerLightBar.image_xscale = (((oPlayer.light / oPlayer.baselight)/64)*128);
+	oPlayerLightBar.image_xscale = ((oPlayer.light / oPlayer.baselight)*2);
 	oPlayerLightBar.x = oCamera.x;
-	oPlayerLightBar.y = oCamera.y - 195;
+	oPlayerLightBar.y = oCamera.y - 210;
 };
 
 
@@ -19,10 +18,9 @@ if instance_exists(oPlayerLightBar)
 
 if instance_exists(oPlayerHealthBar)
 {
-	oPlayerHealthBar.image_yscale = 1;
-	oPlayerHealthBar.image_xscale = (((oPlayer.healthpoints / oPlayer.basehealth)/64)*128);
+	oPlayerHealthBar.image_xscale = ((oPlayer.healthpoints / oPlayer.basehealth)*2);
 	oPlayerHealthBar.x = oCamera.x - 364;
-	oPlayerHealthBar.y = oCamera.y - 195;
+	oPlayerHealthBar.y = oCamera.y - 210;
 };
 
 
@@ -33,10 +31,9 @@ if instance_exists(oPlayerHealthBar)
 
 if instance_exists(oPlayerStaminaBar)
 {
-	oPlayerStaminaBar.image_yscale = 1;
-	oPlayerStaminaBar.image_xscale = - (((oPlayer.stamina / oPlayer.basestamina)/64)*128);
+	oPlayerStaminaBar.image_xscale = - ((oPlayer.stamina / oPlayer.basestamina)*2);
 	oPlayerStaminaBar.x = oCamera.x + 236;
-	oPlayerStaminaBar.y = oCamera.y - 195;
+	oPlayerStaminaBar.y = oCamera.y - 210;
 };
 
 
@@ -47,10 +44,10 @@ if instance_exists(oPlayerStaminaBar)
 
 if instance_exists(oHealIcon)
 {
-	oHealIcon.image_xscale = 1
-	oHealIcon.image_yscale = 1
+	oHealIcon.image_xscale = 0.5;
+	oHealIcon.image_yscale = 0.5;
 	oHealIcon.x = oCamera.x - 224;
-	oHealIcon.y = oCamera.y - 195;
+	oHealIcon.y = oCamera.y - 210;
 	if oPlayer.light > oPlayer.lighthealcost
 	{
 		oHealIcon.image_index = 0;
@@ -58,6 +55,22 @@ if instance_exists(oHealIcon)
 	else
 	{
 		oHealIcon.image_index = 1;
+	};
+};
+
+if instance_exists(oAOEIcon)
+{
+	oAOEIcon.image_xscale = 0.5;
+	oAOEIcon.image_yscale = 0.5;
+	oAOEIcon.x = oCamera.x + 76;
+	oAOEIcon.y = oCamera.y - 210;
+	if oPlayer.light > oPlayer.lightaoeattackcost
+	{
+		oAOEIcon.image_index = 0;
+	};
+	else
+	{
+		oAOEIcon.image_index = 1;
 	};
 };
 

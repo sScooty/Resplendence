@@ -52,11 +52,15 @@ if move < 0
 {
 	sprite_index = sPlayerSideMoving;
 	image_xscale = 2;
+	oSword.rightside = false;
+	oSword.leftside = true;
 };
 else if move > 0
 {
 	sprite_index = sPlayerSideMoving;
 	image_xscale = -2;
+	oSword.rightside = true;
+	oSword.leftside = false;
 };
 else
 {
